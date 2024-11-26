@@ -11,17 +11,52 @@ This assistant contains of 2 backend services:
   - Acts as an entry point for frontend apps (web and mobile) to send requests and get responses
   - Communicates as a bridge between LLM and Toolbox API
 
-## Tools
+### Gateway
 
-There are several tools (functions/API-endpoints) available in a Bitnet Assistant's Toolbox. These tools are available via REST API exposed by toolbox-api service:
+Customer sends a text request to gateway service, and the service responds with a corresponding response based on the input.
 
-- /balances
-- /transactions
-- /exchange-fees
-- /exchange-pairs
-- /exchange-rates
-- /withdrawal-fees
--
+The Gateway Service is a simple API for processing customer queries. It accepts a text request from the user and returns a relevant fake response.
+
+### Endpoints
+
+#### `POST /gateway`
+
+Processes customer queries.
+
+#### Request
+
+**Headers**:
+
+- `Content-Type: application/json`
+
+**Body**:
+
+```json
+{
+  "requestText": "Your query text here"
+}
+```
+
+#### via curl:
+
+```bash
+curl -X POST http://localhost:8081/gateway \
+  -H "Content-Type: application/json" \
+  -d '{"requestText": "what is my balance of BTC?"}'
+
+```
+
+#### response:
+
+```json
+{
+  "responseText": "Your balance of BTC is 0.5 BTC."
+}
+```
+
+## Toolbox
+
+There are several tools (functions/API-endpoints) available in a Bitnet Assistant's Toolbox. These tools are available via REST API exposed by toolbox service:
 
 ### Endpoints
 
