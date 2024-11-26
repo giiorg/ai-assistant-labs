@@ -5,6 +5,9 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
+
+	"github.com/joho/godotenv"
 )
 
 type Response struct {
@@ -13,6 +16,11 @@ type Response struct {
 }
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatalf("error loading .env file: %+v", err)
+	}
+
 	http.HandleFunc("/balances", balancesHandler)
 	http.HandleFunc("/transactions", transactionsHandler)
 	http.HandleFunc("/exchange-fees", exchangeFeesHandler)
@@ -20,8 +28,9 @@ func main() {
 	http.HandleFunc("/exchange-rates", exchangeRatesHandler)
 	http.HandleFunc("/withdrawal-fees", withdrawalFeesHandler)
 
-	log.Println("Starting server on :8080...")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	port := os.Getenv("PORT")
+	log.Println("Starting server on :" + port + "...")
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
 
 func balancesHandler(w http.ResponseWriter, r *http.Request) {
@@ -93,7 +102,7 @@ func withdrawalFeesHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Missing 'asset' query parameter", http.StatusBadRequest)
 		return
 	}
-	network := r.URL.Query().Get("network") // Optional
+	network := r.URL.Query().Get("network")
 	message := fmt.Sprintf("Withdrawal fee retrieved for asset: %s", asset)
 	if network != "" {
 		message += fmt.Sprintf(", network: %s", network)

@@ -32,8 +32,9 @@ func main() {
 
 	http.HandleFunc("/gateway", gatewayHandler)
 
-	log.Println("Gateway service running on :8081...")
-	log.Fatal(http.ListenAndServe(":8081", nil))
+	port := os.Getenv("PORT")
+	log.Println("Starting server on :" + port + "...")
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
 
 func gatewayHandler(w http.ResponseWriter, r *http.Request) {
