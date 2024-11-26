@@ -23,6 +23,17 @@ There are several tools (functions/API-endpoints) available in a Bitnet Assistan
 - /withdrawal-fees
 -
 
+### Endpoints
+
+| Endpoint           | Method | Query Parameters                         | Description                               |
+| ------------------ | ------ | ---------------------------------------- | ----------------------------------------- |
+| `/balances`        | GET    | `userId` (required)                      | Retrieves balances for a user.            |
+| `/transactions`    | GET    | `userId` (required)                      | Retrieves transaction history for a user. |
+| `/exchange-fees`   | GET    | `symbol` (required)                      | Retrieves exchange fees for a symbol.     |
+| `/exchange-pairs`  | GET    | None                                     | Retrieves available exchange pairs.       |
+| `/exchange-rates`  | GET    | `symbol` (required)                      | Retrieves exchange rates for a symbol.    |
+| `/withdrawal-fees` | GET    | `asset` (required), `network` (optional) | Retrieves withdrawal fees for an asset.   |
+
 ## Request-Response Cycle
 
 From customer's request to response to them assistant goes through these steps:
