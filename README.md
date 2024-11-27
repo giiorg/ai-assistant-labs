@@ -112,3 +112,11 @@ sequenceDiagram
     LLM_Engine->>API_Gateway: Final Response
     API_Gateway->>Customer: Final Response
 ```
+
+## Resources
+
+- [openai guides - Function calling](https://platform.openai.com/docs/guides/function-calling)
+- [openai guides - Structured Outputs](https://platform.openai.com/docs/guides/structured-outputs)
+- [openai guides - Fine-tuning](https://platform.openai.com/docs/guides/fine-tuning)
+- [openai cookbook - Fine tuning for function calling](https://cookbook.openai.com/examples/fine_tuning_for_function_calling)
+- [openai cookbook - Structured Outputs for Multi-Agent Systems](https://cookbook.openai.com/examples/structured_outputs_multi_agent)
